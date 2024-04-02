@@ -1,9 +1,14 @@
 package domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Getter
+@Setter
 public class Materia {
     private String nombre;
     private List<Materia> materiasCorrelativas;
@@ -14,9 +19,5 @@ public class Materia {
 
     public void agregarMateriasCorrelativas(Materia ... materias) {
         Collections.addAll(this.materiasCorrelativas,materias);
-    }
-
-    public List<Materia> getMateriasCorrelativas() {
-        return this.materiasCorrelativas;
     }
 }

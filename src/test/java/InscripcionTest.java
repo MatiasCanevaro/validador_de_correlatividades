@@ -1,10 +1,11 @@
 import domain.Alumno;
 import domain.Inscripcion;
 import domain.Materia;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class InscripcionTest {
     Materia algoritmos = new Materia();
@@ -13,6 +14,16 @@ public class InscripcionTest {
     Materia disenio = new Materia();
     Alumno alumno1 = new Alumno();
     Inscripcion inscripcion1 = new Inscripcion(alumno1);
+
+    @Before
+    public void init() {
+        this.inicializarMaterias();
+    }
+
+    private void inicializarMaterias(){
+        paradigmas.agregarMateriasCorrelativas(algoritmos,discreta);
+        disenio.agregarMateriasCorrelativas(algoritmos,discreta,paradigmas);
+    }
 
     @Test
     public void alumno1ApruebaLaInscripcionDeAlgoritmos() {
@@ -23,7 +34,6 @@ public class InscripcionTest {
     }
     @Test
     public void alumno1ApruebaLaInscripcionDeParadigmas() {
-        paradigmas.agregarMateriasCorrelativas(algoritmos,discreta);
         alumno1.agregarMateriasAprobadas(algoritmos,discreta);
         inscripcion1.agregarMateriasAInscribirse(paradigmas);
 
@@ -32,7 +42,6 @@ public class InscripcionTest {
     }
     @Test
     public void alumno1DesapruebaLaInscripcionDeParadigmas() {
-        paradigmas.agregarMateriasCorrelativas(algoritmos,discreta);
         alumno1.agregarMateriasAprobadas(algoritmos);//le falta discreta
         inscripcion1.agregarMateriasAInscribirse(paradigmas);
 
@@ -41,7 +50,6 @@ public class InscripcionTest {
     }
     @Test
     public void alumno1ApruebaLaInscripcionDeDisenio() {
-        disenio.agregarMateriasCorrelativas(algoritmos,discreta,paradigmas);
         alumno1.agregarMateriasAprobadas(algoritmos,discreta,paradigmas);
         inscripcion1.agregarMateriasAInscribirse(disenio);
 
@@ -50,7 +58,6 @@ public class InscripcionTest {
     }
     @Test
     public void alumno1DesapruebaLaInscripcionDeDisenio() {
-        disenio.agregarMateriasCorrelativas(algoritmos,discreta,paradigmas);
         alumno1.agregarMateriasAprobadas(discreta,paradigmas);//le falta algoritmos
         inscripcion1.agregarMateriasAInscribirse(disenio);
 
@@ -59,7 +66,6 @@ public class InscripcionTest {
     }
     @Test
     public void alumno1ApruebaLaInscripcionDeTodasLasMaterias() {
-        disenio.agregarMateriasCorrelativas(algoritmos,discreta,paradigmas);
         alumno1.agregarMateriasAprobadas(algoritmos,discreta,paradigmas);
         inscripcion1.agregarMateriasAInscribirse(algoritmos,discreta,paradigmas,disenio);
 
